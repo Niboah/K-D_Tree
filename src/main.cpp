@@ -5,6 +5,7 @@
 #include <map>
 using namespace std;
 
+<<<<<<< HEAD
 double distance(const vector<double>& point1, const vector<double>& point2){
     if(point1.size() != point2.size())  throw invalid_argument( "points size not equal" );
 
@@ -31,10 +32,23 @@ int main() {
 
     for (int i=0;i<n;i++) {
         vector<double> point(m);
+=======
+int main() {
+    KDTree tree=KDTree();
+    // Insertar puntos k-dimensionales en el árbol
+    int n;
+    int m;
+    cin>>n>>m;
+    for (int i=0;i<n;i++) {
+        vector<double> point(m);
+        string name;
+        cin>>name;
+>>>>>>> 136e675 (first commit)
         for(int j=0;j<m;j++){
             double aux;
             cin>>aux;
             point[j]=aux;
+<<<<<<< HEAD
             cout<<aux<<" ";
         }
 
@@ -59,6 +73,15 @@ int main() {
     cout<<"Correct result:";
     for(double d:result) cout<<" "<<d;
     cout<<endl;
+=======
+        }
+        tree.insert(name,point);
+    }
+
+    // Realizar operaciones en el árbol...
+    tree.print(n);
+
+>>>>>>> 136e675 (first commit)
     // Destruir el árbol al finalizar
     tree.destroy();
 

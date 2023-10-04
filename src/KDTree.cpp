@@ -5,7 +5,11 @@ using namespace std;
 KDNode::KDNode(const vector<double>& p) : point(p), left(nullptr), right(nullptr) {}
 
 string KDNode::getName(){
+<<<<<<< HEAD
     string name="";
+=======
+    string name="cood:";
+>>>>>>> 136e675 (first commit)
     for(double p:point)
         name+=" "+ to_string(p);
     return name;
@@ -41,7 +45,11 @@ void KDTree::destroyTree(KDNode* node) {
 }
 
 // Función para insertar un punto en el árbol k-d
+<<<<<<< HEAD
 void KDTree::insert(const vector<double>& point) {
+=======
+void KDTree::insert(string name, const vector<double>& point) {
+>>>>>>> 136e675 (first commit)
     root = insert(root, point, 0);
 }
 
@@ -51,6 +59,7 @@ void KDTree::destroy() {
     root = nullptr;
 }
 
+<<<<<<< HEAD
 // Función que calcula la distancia euclidiana entre 2 puntos
 double KDTree::distance(const vector<double>& point1, const vector<double>& point2){
     if(point1.size() != point2.size())  throw invalid_argument( "points size not equal" );
@@ -103,6 +112,8 @@ KDNode* KDTree::findNearest(KDNode* root, const vector<double>& q){
 
 
 
+=======
+>>>>>>> 136e675 (first commit)
 // Función para mostrar el arbol k-d
 void KDTree::print2DUtil(KDNode* root, int space,int count){
     // Base case
@@ -124,8 +135,14 @@ void KDTree::print2DUtil(KDNode* root, int space,int count){
     print2DUtil(root->right, space,count);
 }
 
+<<<<<<< HEAD
 // Función para mostrar el arbol k-d
 void KDTree::print() {
+=======
+
+// Función para mostrar el arbol k-d
+void KDTree::print(int n) {
+>>>>>>> 136e675 (first commit)
     print2DUtil(root, 0,20);
 }
 
