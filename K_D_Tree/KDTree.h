@@ -35,7 +35,7 @@ class KDTree {
         void destroyTree(KDNode* node);
 
         // Función para mostrar el árbil k-d
-        void print2DUtil(KDNode* root, int space,vector<vector<string>> &out,int& col,int);
+        void print2DUtil(KDNode* root, int ,int);
 
     public:
         KDTree();
