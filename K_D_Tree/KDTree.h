@@ -1,7 +1,3 @@
-//
-// Created by 15ARCH6H on 27/09/2023.
-//
-
 #ifndef K_D_TREE_KDTREE_H
 #define K_D_TREE_KDTREE_H
 
@@ -14,13 +10,14 @@ using namespace std;
 
 class KDNode {
     public:
-
         vector<double> point;  // Coordenadas k-dimensionales
         KDNode* left;
         KDNode* right;
 
+        // Constructora
         KDNode(const vector<double>& p);
 
+        // Función para sacar las coordenadas
         string getName();
 };
 
