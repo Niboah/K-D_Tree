@@ -5,7 +5,7 @@ using namespace std;
 KDNode::KDNode(const vector<double>& p) : point(p), left(nullptr), right(nullptr) {}
 
 string KDNode::getName(){
-    string name="cood:";
+    string name="coord:";
     for(double p:point)
         name+=" "+ to_string(p);
     return name;
@@ -41,7 +41,7 @@ void KDTree::destroyTree(KDNode* node) {
 }
 
 // Función para insertar un punto en el árbol k-d
-void KDTree::insert(string name, const vector<double>& point) {
+void KDTree::insert(const vector<double>& point) {
     root = insert(root, point, 0);
 }
 
@@ -74,7 +74,7 @@ void KDTree::print2DUtil(KDNode* root, int space,int count){
 
 
 // Función para mostrar el arbol k-d
-void KDTree::print(int n) {
+void KDTree::print() {
     print2DUtil(root, 0,20);
 }
 

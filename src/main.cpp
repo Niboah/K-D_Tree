@@ -20,11 +20,11 @@ int main() {
             cin>>aux;
             point[j]=aux;
         }
-        tree.insert(name,point);
+        tree.insert(point);
     }
 
     // Realizar operaciones en el árbol...
-    tree.print(n);
+    tree.print();
 
     // Destruir el árbol al finalizar
     tree.destroy();

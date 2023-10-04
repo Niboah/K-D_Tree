@@ -38,13 +38,13 @@ class KDTree {
         KDTree();
 
         // Función para insertar un punto en el árbol k-d
-        void insert(string name, const vector<double>& point);
+        void insert(const vector<double>& point);
 
         // Función para destruir el árbol k-d
         void destroy();
 
         // Función para mostrar el árbil k-d
-        void print(int n);
+        void print();
 
         KDNode* getRoot() {return root;}
 };
