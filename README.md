@@ -1,1 +1,1 @@
-# dimensional
+# Arbres k-Dimensionals 
