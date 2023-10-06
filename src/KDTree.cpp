@@ -5,7 +5,7 @@ using namespace std;
 KDNode::KDNode(const vector<double>& p) : point(p), left(nullptr), right(nullptr) {}
 
 string KDNode::getName(){
-    string name="coord:";
+    string name="";
     for(double p:point)
         name+=" "+ to_string(p);
     return name;
@@ -51,6 +51,58 @@ void KDTree::destroy() {
     root = nullptr;
 }
 
+// Función que calcula la distancia euclidiana entre 2 puntos
+double KDTree::distance(const vector<double>& point1, const vector<double>& point2){
+    if(point1.size() != point2.size())  throw invalid_argument( "points size not equal" );
+
+    double sum=0;
+
+    for(int i=0; i< point1.size();++i)
+        sum += (point1[i]-point2[i]) * (point1[i]-point2[i]);
+
+    return sqrt(sum);
+}
+
+// Función para encontrar el punto más cercano recursivamente
+KDNode* KDTree::findNearest_rec(KDNode* root, const vector<double>& q,KDNode* best, int depth){
+    if (root == nullptr) return best;
+
+    // Calcula la distancia entre el punto actual y Q
+    double currentDist = distance(root->point, q);
+    double bestDist = distance(best->point, q);
+
+    // Compara y actualiza el punto más cercano si es necesario
+    if (currentDist < bestDist) {
+        best = root;
+    }
+
+    // Elige la siguiente dimensión para dividir el espacio
+    int k = root->point.size();
+    int dimension = depth % k;
+
+    // Decide si buscar en el subárbol izquierdo o derecho
+    KDNode* nextBranch = (q[dimension] < root->point[dimension]) ? root->left : root->right;
+    KDNode* otherBranch = (nextBranch == root->left) ? root->right : root->left;
+
+    // Realiza la búsqueda en el subárbol elegido
+    best = findNearest_rec(nextBranch, q, best, depth + 1);
+
+    // Verifica si es necesario buscar en el otro subárbol
+    if (abs(q[dimension] - root->point[dimension]) < bestDist) {
+        best = findNearest_rec(otherBranch, q, best, depth + 1);
+    }
+
+    return best;
+
+}
+
+// Función para encontrar el punto más cercano
+KDNode* KDTree::findNearest(KDNode* root, const vector<double>& q){
+    return findNearest_rec(root,q,root,0);
+}
+
+
+
 // Función para mostrar el arbol k-d
 void KDTree::print2DUtil(KDNode* root, int space,int count){
     // Base case
@@ -71,7 +123,6 @@ void KDTree::print2DUtil(KDNode* root, int space,int count){
     // Process left child
     print2DUtil(root->right, space,count);
 }
-
 
 // Función para mostrar el arbol k-d
 void KDTree::print() {
