@@ -34,54 +34,31 @@ class KDTree {
         // Función para mostrar el árbil k-d
         void print2DUtil(KDNode* root, int ,int);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> ff25502712ac2b69618e84fa36c3e09869117fa0
+
         // Función que calcula la distancia euclidiana entre 2 puntos
         double distance(const vector<double>& point1, const vector<double>& point2);
 
         // Función para encontrar el punto más cercano recursivamente
         KDNode* findNearest_rec(KDNode* root, const vector<double>& q,KDNode* best, int depth);
 
-<<<<<<< HEAD
-=======
->>>>>>> 136e675 (first commit)
-=======
->>>>>>> ff25502712ac2b69618e84fa36c3e09869117fa0
     public:
         KDTree();
 
         // Función para insertar un punto en el árbol k-d
-<<<<<<< HEAD
-<<<<<<< HEAD
         void insert(const vector<double>& point);
-=======
-        void insert(string name, const vector<double>& point);
->>>>>>> 136e675 (first commit)
-=======
-        void insert(const vector<double>& point);
->>>>>>> ff25502712ac2b69618e84fa36c3e09869117fa0
+
 
         // Función para destruir el árbol k-d
         void destroy();
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> ff25502712ac2b69618e84fa36c3e09869117fa0
         // Función para encontrar el punto más cercano
         KDNode* findNearest(KDNode* root, const vector<double>& q);
 
         // Función para mostrar el árbil k-d
         void print();
-<<<<<<< HEAD
-=======
+
         // Función para mostrar el árbil k-d
         void print(int n);
->>>>>>> 136e675 (first commit)
-=======
->>>>>>> ff25502712ac2b69618e84fa36c3e09869117fa0
 
         KDNode* getRoot() {return root;}
 };

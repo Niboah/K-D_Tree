@@ -5,15 +5,7 @@ using namespace std;
 KDNode::KDNode(const vector<double>& p) : point(p), left(nullptr), right(nullptr) {}
 
 string KDNode::getName(){
-<<<<<<< HEAD
-<<<<<<< HEAD
     string name="";
-=======
-    string name="cood:";
->>>>>>> 136e675 (first commit)
-=======
-    string name="";
->>>>>>> ff25502712ac2b69618e84fa36c3e09869117fa0
     for(double p:point)
         name+=" "+ to_string(p);
     return name;
@@ -27,10 +19,10 @@ KDNode* KDTree::insert(KDNode* node, const vector<double>& point, int depth) {
         return new KDNode(point);
 
     int k = point.size();
-    int cd = depth % k;
+    int dimension = depth % k;
 
     // Comparar puntos en función de la dimensión actual
-    if (point[cd] < node->point[cd]) {
+    if (point[dimension] < node->point[dimension]) {
         node->left = insert(node->left, point, depth + 1);
     } else {
         node->right = insert(node->right, point, depth + 1);
@@ -49,15 +41,7 @@ void KDTree::destroyTree(KDNode* node) {
 }
 
 // Función para insertar un punto en el árbol k-d
-<<<<<<< HEAD
-<<<<<<< HEAD
 void KDTree::insert(const vector<double>& point) {
-=======
-void KDTree::insert(string name, const vector<double>& point) {
->>>>>>> 136e675 (first commit)
-=======
-void KDTree::insert(const vector<double>& point) {
->>>>>>> ff25502712ac2b69618e84fa36c3e09869117fa0
     root = insert(root, point, 0);
 }
 
@@ -67,10 +51,6 @@ void KDTree::destroy() {
     root = nullptr;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> ff25502712ac2b69618e84fa36c3e09869117fa0
 // Función que calcula la distancia euclidiana entre 2 puntos
 double KDTree::distance(const vector<double>& point1, const vector<double>& point2){
     if(point1.size() != point2.size())  throw invalid_argument( "points size not equal" );
@@ -113,7 +93,6 @@ KDNode* KDTree::findNearest_rec(KDNode* root, const vector<double>& q,KDNode* be
     }
 
     return best;
-
 }
 
 // Función para encontrar el punto más cercano
@@ -121,13 +100,6 @@ KDNode* KDTree::findNearest(KDNode* root, const vector<double>& q){
     return findNearest_rec(root,q,root,0);
 }
 
-
-
-<<<<<<< HEAD
-=======
->>>>>>> 136e675 (first commit)
-=======
->>>>>>> ff25502712ac2b69618e84fa36c3e09869117fa0
 // Función para mostrar el arbol k-d
 void KDTree::print2DUtil(KDNode* root, int space,int count){
     // Base case
@@ -149,19 +121,8 @@ void KDTree::print2DUtil(KDNode* root, int space,int count){
     print2DUtil(root->right, space,count);
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-// Función para mostrar el arbol k-d
-void KDTree::print() {
-=======
 
 // Función para mostrar el arbol k-d
-void KDTree::print(int n) {
->>>>>>> 136e675 (first commit)
-=======
-// Función para mostrar el arbol k-d
 void KDTree::print() {
->>>>>>> ff25502712ac2b69618e84fa36c3e09869117fa0
     print2DUtil(root, 0,20);
 }
-
