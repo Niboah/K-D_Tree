@@ -8,6 +8,9 @@
 
 using namespace std;
 
+// Función que calcula la distancia euclidiana entre 2 puntos
+double distance(const vector<double>& point1, const vector<double>& point2);
+
 class KDNode {
     public:
         vector<double> point;  // Coordenadas k-dimensionales
@@ -34,10 +37,6 @@ class KDTree {
         // Función para mostrar el árbil k-d
         void print2DUtil(KDNode* root, int ,int);
 
-
-        // Función que calcula la distancia euclidiana entre 2 puntos
-        double distance(const vector<double>& point1, const vector<double>& point2);
-
         // Función para encontrar el punto más cercano recursivamente
         KDNode* findNearest_rec(KDNode* root, const vector<double>& q,KDNode* best, int depth);
 
@@ -52,7 +51,7 @@ class KDTree {
         void destroy();
 
         // Función para encontrar el punto más cercano
-        KDNode* findNearest(KDNode* root, const vector<double>& q);
+        KDNode* findNearest(const vector<double>& q);
 
         // Función para mostrar el árbil k-d
         void print();

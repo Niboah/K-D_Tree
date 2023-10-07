@@ -1,34 +1,24 @@
 #include <iostream>
 #include <vector>
 #include "KDTree.h"
-#include <queue>
-#include <map>
+
 using namespace std;
 
-double distance(const vector<double>& point1, const vector<double>& point2){
-    if(point1.size() != point2.size())  throw invalid_argument( "points size not equal" );
-
-    double sum=0;
-
-    for(int i=0; i< point1.size();++i)
-        sum += ((point1[i]-point2[i]) * (point1[i]-point2[i]));
-
-    return sqrt(sum);
-}
 
 int main() {
     KDTree tree=KDTree();
 
-    int n;
-    int m;
+    int n; //Numero de punts
+    int m; //dimensions
     cin>>n>>m;
 
-    //point
+    //point des del que busquem el mes proper
     vector<double> epoint(m);
     for(int i=0;i<m;i++){
         cin>>epoint[i];
     }
 
+    //input de tots el punts
     for (int i=0;i<n;i++) {
         vector<double> point(m);
         for(int j=0;j<m;j++){
@@ -42,7 +32,7 @@ int main() {
         cout<<" -> "<<distance(epoint,point)<<endl;
     }
 
-    //result
+    //si ja sabem el resultat correcte del punt guanyador el donem per comparar
     vector<double> result(m);
     for(int i=0;i<m;i++){
         cin>>result[i];
@@ -55,7 +45,7 @@ int main() {
     cout<<"Point:";
     for(double d:epoint)cout<<" "<<d;
     cout<<endl;
-    cout<<"Result "<<tree.findNearest(tree.getRoot(),epoint)->getName()<<endl;
+    cout<<"Result "<<tree.findNearest(epoint)->getName()<<endl;
     cout<<"Correct result:";
     for(double d:result) cout<<" "<<d;
     cout<<endl;

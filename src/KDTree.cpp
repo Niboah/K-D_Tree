@@ -52,7 +52,7 @@ void KDTree::destroy() {
 }
 
 // Función que calcula la distancia euclidiana entre 2 puntos
-double KDTree::distance(const vector<double>& point1, const vector<double>& point2){
+double distance(const vector<double>& point1, const vector<double>& point2){
     if(point1.size() != point2.size())  throw invalid_argument( "points size not equal" );
 
     double sum=0;
@@ -96,7 +96,7 @@ KDNode* KDTree::findNearest_rec(KDNode* root, const vector<double>& q,KDNode* be
 }
 
 // Función para encontrar el punto más cercano
-KDNode* KDTree::findNearest(KDNode* root, const vector<double>& q){
+KDNode* KDTree::findNearest(const vector<double>& q){
     return findNearest_rec(root,q,root,0);
 }
 
