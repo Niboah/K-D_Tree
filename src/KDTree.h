@@ -35,10 +35,10 @@ class KDTree {
         void destroyTree(KDNode* node);
 
         // Función para mostrar el árbil k-d
-        void print2DUtil(KDNode* root, int ,int);
+        void print2DUtil(KDNode* root, int ,int,bool);
 
         // Función para encontrar el punto más cercano recursivamente
-        KDNode* findNearest_rec(KDNode* root, const vector<double>& q,KDNode* best, int depth);
+        KDNode* findNearest_rec(KDNode* root, const vector<double>& q,KDNode* best, int depth,int& cost);
 
     public:
         KDTree();
@@ -51,7 +51,7 @@ class KDTree {
         void destroy();
 
         // Función para encontrar el punto más cercano
-        KDNode* findNearest(const vector<double>& q);
+        KDNode* findNearest(const vector<double>& q,int& cost);
 
         // Función para mostrar el árbil k-d
         void print();

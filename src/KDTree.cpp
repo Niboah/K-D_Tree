@@ -64,44 +64,44 @@ double distance(const vector<double>& point1, const vector<double>& point2){
 }
 
 // Función para encontrar el punto más cercano recursivamente
-KDNode* KDTree::findNearest_rec(KDNode* root, const vector<double>& q,KDNode* best, int depth){
-    if (root == nullptr) return best;
-
+KDNode* KDTree::findNearest_rec(KDNode* current, const vector<double>& q,KDNode* best, int depth,int& cost){
+    if (current == nullptr) return best;
+    cost+=1;
+    cout<<current->getName()<<endl;
     // Calcula la distancia entre el punto actual y Q
-    double currentDist = distance(root->point, q);
+    double currentDist = distance(current->point, q);
     double bestDist = distance(best->point, q);
 
     // Compara y actualiza el punto más cercano si es necesario
-    if (currentDist < bestDist) {
-        best = root;
-    }
+    if (currentDist < bestDist)
+        best = current;
 
     // Elige la siguiente dimensión para dividir el espacio
-    int k = root->point.size();
+    int k = current->point.size();
     int dimension = depth % k;
 
     // Decide si buscar en el subárbol izquierdo o derecho
-    KDNode* nextBranch = (q[dimension] < root->point[dimension]) ? root->left : root->right;
-    KDNode* otherBranch = (nextBranch == root->left) ? root->right : root->left;
+    KDNode* nextBranch = (q[dimension] < current->point[dimension]) ? current->left : current->right;
+    KDNode* otherBranch = (nextBranch == current->left) ? current->right : current->left;
 
     // Realiza la búsqueda en el subárbol elegido
-    best = findNearest_rec(nextBranch, q, best, depth + 1);
+    best = findNearest_rec(nextBranch, q, best, depth + 1,cost);
 
     // Verifica si es necesario buscar en el otro subárbol
-    if (abs(q[dimension] - root->point[dimension]) < bestDist) {
-        best = findNearest_rec(otherBranch, q, best, depth + 1);
+    if (abs(q[dimension] - current->point[dimension]) < bestDist) {
+        best = findNearest_rec(otherBranch, q, best, depth + 1,cost);
     }
 
     return best;
 }
 
 // Función para encontrar el punto más cercano
-KDNode* KDTree::findNearest(const vector<double>& q){
-    return findNearest_rec(root,q,root,0);
+KDNode* KDTree::findNearest(const vector<double>& q,int &cost){
+    return findNearest_rec(root,q,root,0,cost);
 }
 
 // Función para mostrar el arbol k-d
-void KDTree::print2DUtil(KDNode* root, int space,int count){
+void KDTree::print2DUtil(KDNode* root, int space,int count,bool left){
     // Base case
     if (root == NULL)
         return;
@@ -110,19 +110,21 @@ void KDTree::print2DUtil(KDNode* root, int space,int count){
     space += count;
 
     // Process right child first
-    print2DUtil(root->left, space,count);
+    print2DUtil(root->left, space,count,true);
 
     // Print current node after space
     for (int i = count; i < space; i++)
         cout << " ";
+    if(left)cout<<"/";
+    else cout<<"\\";
     cout << root->getName() << "\n";
 
     // Process left child
-    print2DUtil(root->right, space,count);
+    print2DUtil(root->right, space,count,false);
 }
 
 
 // Función para mostrar el arbol k-d
 void KDTree::print() {
-    print2DUtil(root, 0,20);
+    print2DUtil(root, 0,20,true);
 }

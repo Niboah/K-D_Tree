@@ -45,10 +45,12 @@ int main() {
     cout<<"Point:";
     for(double d:epoint)cout<<" "<<d;
     cout<<endl;
-    cout<<"Result "<<tree.findNearest(epoint)->getName()<<endl;
+    int cost=0;
+    cout<<"Result "<<tree.findNearest(epoint,cost)->getName()<<endl;
     cout<<"Correct result:";
     for(double d:result) cout<<" "<<d;
     cout<<endl;
+    cout<<"Cost: "<<cost<<endl;
 
     // Destruir el árbol al finalizar
     tree.destroy();
