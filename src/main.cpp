@@ -8,52 +8,38 @@ using namespace std;
 int main() {
     KDTree tree=KDTree();
 
-    int n; //Numero de punts
-    int m; //dimensions
-    cin>>n>>m;
+    int N=10000;
+    int Q=10;
+    cout<<"N K Coste(Nodos) Coste(Tiempo)"<<endl;
+    for(int n=1;n<N;n++){
+        for(int k=2;k<=6;k++){
 
-    //point des del que busquem el mes proper
-    vector<double> epoint(m);
-    for(int i=0;i<m;i++){
-        cin>>epoint[i];
-    }
+            for (int i=0;i<n;i++) {
+                vector<double> tree_point(k);
+                for(int j=0;j<k;j++){
+                    tree_point[j] = (double)(rand() % 1000000) / 1000000;
+                }
+                tree.insert(tree_point);
+            }
 
-    //input de tots el punts
-    for (int i=0;i<n;i++) {
-        vector<double> point(m);
-        for(int j=0;j<m;j++){
-            double aux;
-            cin>>aux;
-            point[j]=aux;
-            cout<<aux<<" ";
+
+            for(int q=0; q < Q;q++){
+                vector<double> point(k);
+                for(int i=0;i<k;i++){
+                    point[i] = (double)(rand() % 1000000) / 1000000;
+                }
+
+                int cost=0;
+                clock_t start, end;
+                start = clock();
+                tree.findNearest(point,cost);
+                end = clock();
+                cout<<n<<" "<<k<<" "<<cost<<" "<<(double)(end-start)/CLOCKS_PER_SEC<<endl;
+
+            }
+            tree.destroy();
         }
-
-        tree.insert(point);
-        cout<<" -> "<<distance(epoint,point)<<endl;
     }
-
-    //si ja sabem el resultat correcte del punt guanyador el donem per comparar
-    vector<double> result(m);
-    for(int i=0;i<m;i++){
-        cin>>result[i];
-    }
-
-    // Realizar operaciones en el árbol...
-    tree.print();
-
-    cout<<"------"<<endl;
-    cout<<"Point:";
-    for(double d:epoint)cout<<" "<<d;
-    cout<<endl;
-    int cost=0;
-    cout<<"Result "<<tree.findNearest(epoint,cost)->getName()<<endl;
-    cout<<"Correct result:";
-    for(double d:result) cout<<" "<<d;
-    cout<<endl;
-    cout<<"Cost: "<<cost<<endl;
-
-    // Destruir el árbol al finalizar
-    tree.destroy();
 
     return 0;
 }

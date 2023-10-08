@@ -66,15 +66,9 @@ double distance(const vector<double>& point1, const vector<double>& point2){
 // Función para encontrar el punto más cercano recursivamente
 KDNode* KDTree::findNearest_rec(KDNode* current, const vector<double>& q,KDNode* best, int depth,int& cost){
     if (current == nullptr) return best;
-    cost+=1;
-    cout<<current->getName()<<endl;
-    // Calcula la distancia entre el punto actual y Q
-    double currentDist = distance(current->point, q);
-    double bestDist = distance(best->point, q);
 
-    // Compara y actualiza el punto más cercano si es necesario
-    if (currentDist < bestDist)
-        best = current;
+    //Actualizar coste
+    cost+=1;
 
     // Elige la siguiente dimensión para dividir el espacio
     int k = current->point.size();
@@ -86,6 +80,14 @@ KDNode* KDTree::findNearest_rec(KDNode* current, const vector<double>& q,KDNode*
 
     // Realiza la búsqueda en el subárbol elegido
     best = findNearest_rec(nextBranch, q, best, depth + 1,cost);
+
+    // Calcula la distancia entre el punto actual y Q
+    double currentDist = distance(current->point, q);
+    double bestDist = distance(best->point, q);
+
+    // Compara y actualiza el punto más cercano si es necesario
+    if (currentDist < bestDist)
+        best = current;
 
     // Verifica si es necesario buscar en el otro subárbol
     if (abs(q[dimension] - current->point[dimension]) < bestDist) {

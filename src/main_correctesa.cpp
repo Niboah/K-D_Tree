@@ -39,13 +39,11 @@ int main() {
             min=dist;
         }
     }
-
-
-    // Realizar operaciones en el árbol...
     //tree.print();
 
     cout<<"------"<<endl;
-    cout<<"Point:";
+    cout<<"Num nodes: "<<n<<" | Num dimensiones: "<<m<<endl;
+    cout<<"Punto aleatorio :";
     for(double d:epoint)cout<<" "<<d;
     cout<<endl;
     int cost=0;
@@ -53,7 +51,8 @@ int main() {
     cout<<"Correct result:";
     for(double d:sol) cout<<" "<<d;
     cout<<endl;
-    cout<<"Cost "<<cost<<endl;
+    cout<<"Coste: "<<cost<<endl;
+
     // Destruir el árbol al finalizar
     tree.destroy();
 
