@@ -2,7 +2,7 @@
 
 using namespace std;
 
-KDNode::KDNode(const vector<double>& p) : point(p), left(nullptr), right(nullptr) {}
+KDNode::KDNode(const vector<double>& p) : point(p), left(nullptr), right(nullptr), discriminant(rand()%p.size()) {}
 
 string KDNode::getName(){
     string name="";
@@ -11,25 +11,23 @@ string KDNode::getName(){
     return name;
 }
 
+
 KDTree::KDTree() : root(nullptr) {}
 
 // Función para insertar un punto en el árbol k-d
-KDNode* KDTree::insert(KDNode* node, const vector<double>& point, int depth) {
+KDNode* KDTree::insert(KDNode* node, const vector<double>& point) {
     if (node == nullptr){
-
-        //cout<<(depth%point.size())<<endl;
-        
+        KDNode* a = new KDNode(point);
+        cout<<a->discriminant<<endl;
         return new KDNode(point);
+
     }
 
-    int k = point.size();
-    int dimension = depth % k;
-
     // Comparar puntos en función de la dimensión actual
-    if (point[dimension] < node->point[dimension]) {
-        node->left = insert(node->left, point, depth + 1);
+    if (point[node->discriminant] < node->point[node->discriminant]) {
+        node->left = insert(node->left, point);
     } else {
-        node->right = insert(node->right, point, depth + 1);
+        node->right = insert(node->right, point);
     }
 
     return node;
@@ -46,7 +44,7 @@ void KDTree::destroyTree(KDNode* node) {
 
 // Función para insertar un punto en el árbol k-d
 void KDTree::insert(const vector<double>& point) {
-    root = insert(root, point, 0);
+    root = insert(root, point);
 }
 
 // Función para destruir el árbol k-d
@@ -68,22 +66,18 @@ double distance(const vector<double>& point1, const vector<double>& point2){
 }
 
 // Función para encontrar el punto más cercano recursivamente
-KDNode* KDTree::findNearest_rec(KDNode* current, const vector<double>& q,KDNode* best, int depth,int& cost){
+KDNode* KDTree::findNearest_rec(KDNode* current, const vector<double>& q,KDNode* best,int& cost){
     if (current == nullptr) return best;
 
     //Actualizar coste
     cost+=1;
 
-    // Elige la siguiente dimensión para dividir el espacio
-    int k = current->point.size();
-    int dimension = depth % k;
-
     // Decide si buscar en el subárbol izquierdo o derecho
-    KDNode* nextBranch = (q[dimension] < current->point[dimension]) ? current->left : current->right;
+    KDNode* nextBranch = (q[current->discriminant] < current->point[current->discriminant]) ? current->left : current->right;
     KDNode* otherBranch = (nextBranch == current->left) ? current->right : current->left;
 
     // Realiza la búsqueda en el subárbol elegido
-    best = findNearest_rec(nextBranch, q, best, depth + 1,cost);
+    best = findNearest_rec(nextBranch, q, best,cost);
 
     // Calcula la distancia entre el punto actual y Q
     double currentDist = distance(current->point, q);
@@ -94,8 +88,8 @@ KDNode* KDTree::findNearest_rec(KDNode* current, const vector<double>& q,KDNode*
         best = current;
 
     // Verifica si es necesario buscar en el otro subárbol
-    if (abs(q[dimension] - current->point[dimension]) < bestDist) {
-        best = findNearest_rec(otherBranch, q, best, depth + 1,cost);
+    if (abs(q[current->discriminant] - current->point[current->discriminant]) < bestDist) {
+        best = findNearest_rec(otherBranch, q, best,cost);
     }
 
     return best;
@@ -103,7 +97,7 @@ KDNode* KDTree::findNearest_rec(KDNode* current, const vector<double>& q,KDNode*
 
 // Función para encontrar el punto más cercano
 KDNode* KDTree::findNearest(const vector<double>& q,int &cost){
-    return findNearest_rec(root,q,root,0,cost);
+    return findNearest_rec(root,q,root,cost);
 }
 
 // Función para mostrar el arbol k-d
