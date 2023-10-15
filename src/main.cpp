@@ -1,39 +1,44 @@
 #include <iostream>
 #include <vector>
 #include "KDTree.h"
-#include "../point_generation.hh"
+#include "point_generation.hh"
+
+#define N 10000
+#define Q 10
 
 using namespace std;
 
+int main(int argc, char* argv[]) {
 
-int main() {
+    int K=2;
+
+    if(argc>2) {
+        cout<<"Usage: main [K]\n"
+              "    K : k-dimesions"<<endl;
+        return 0;
+    }else if(argc==2){
+        K = *argv[1] - '0';
+    }
     KDTree tree=KDTree();
 
-    int N=10000;
-    int Q=10;
-    cout<<"N K Coste(Nodos) Coste(Tiempo)"<<endl;
     for(int n=1;n<N;n++){
-        for(int k=2;k<=6;k++){
 
-            for (int i=0;i<n;i++) {
-                vector<double> tree_point = generate_point(k);
-                tree.insert(tree_point);
-            }
-
-
-            for(int q=0; q < Q;q++){
-                vector<double> point = generate_point(k);
-
-                int cost=0;
-                clock_t start, end;
-                start = clock();
-                tree.findNearest(point,cost);
-                end = clock();
-                cout<<n<<" "<<k<<" "<<cost<<" "<<(double)(end-start)/CLOCKS_PER_SEC<<endl;
-
-            }
-            tree.destroy();
+        for (int i=0;i<n;i++) {
+            vector<double> tree_point = generate_point(K);
+            tree.insert(tree_point);
         }
+        double costMean=0;
+        for(int q=0; q < Q;q++){
+            vector<double> point = generate_point(K);
+
+            int cost=0;
+            tree.findNearest(point,cost);
+            costMean+=cost;
+        }
+
+        cout<<n<<" "<<costMean/Q<<endl;
+
+        tree.destroy();
     }
 
     return 0;

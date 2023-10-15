@@ -1,9 +1,7 @@
 #include <iostream>
 #include <vector>
-#include <time.h>
-#include <stdlib.h>
 #include "KDTree.h"
-#include "../point_generation.hh"
+#include "point_generation.hh"
 
 using namespace std;
 

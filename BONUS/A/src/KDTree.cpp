@@ -17,8 +17,8 @@ KDTree::KDTree() : root(nullptr) {}
 // Función para insertar un punto en el árbol k-d
 KDNode* KDTree::insert(KDNode* node, const vector<double>& point) {
     if (node == nullptr){
-        KDNode* a = new KDNode(point);
-        cout<<a->discriminant<<endl;
+        //KDNode* a = new KDNode(point);
+        //cout<<a->discriminant<<endl;
         return new KDNode(point);
 
     }

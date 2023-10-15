@@ -10,13 +10,13 @@ KDTree: KDTree.o main.o  point_generation.o
 KDTree_Correctesa: KDTree.o main_correctesa.o point_generation.o
 	$(CC) $(CFLAGS) -o main_correctesa.exe KDTree.o main_correctesa.o point_generation.o
 
-point_generation.o: point_generation.cpp point_generation.hh
-	$(CC) $(CFLAGS) -c point_generation.cpp
+point_generation.o: src/point_generation.cpp src/point_generation.hh
+	$(CC) $(CFLAGS) -c src/point_generation.cpp
 
-main.o: src/main.cpp src/KDTree.h point_generation.hh
+main.o: src/main.cpp src/KDTree.h src/point_generation.hh
 	$(CC) $(CFLAGS) -c src/main.cpp
 
-main_correctesa.o: src/main_correctesa.cpp src/KDTree.h point_generation.hh
+main_correctesa.o: src/main_correctesa.cpp src/KDTree.h src/point_generation.hh
 	$(CC) $(CFLAGS) -c src/main_correctesa.cpp
 
 KDTree.o: src/KDTree.cpp src/KDTree.h
