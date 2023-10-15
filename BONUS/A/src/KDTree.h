@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <cmath>
+#include "point_generation.hh"
 
 using namespace std;
 
