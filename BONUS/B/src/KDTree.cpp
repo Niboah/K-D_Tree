@@ -33,10 +33,10 @@ int KDTree::bigdimensionBB (const vector<double>& bb){
 // Función para insertar un punto en el árbol k-d
 KDNode* KDTree::insert(KDNode* node, const vector<double>& point,vector<double> bb) {
     
-    int dis = bigdimensionBB(bb);//mira la dimensió amb més amplitud.
+    
     if (node == nullptr){
+        int dis = bigdimensionBB(bb);//mira la dimensió amb més amplitud.
         KDNode* a = new KDNode(point,dis);
-        cout<<a->discriminant<<endl;
         return a;
     }
     // Comparar puntos en función de la dimensión actual
