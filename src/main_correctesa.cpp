@@ -3,6 +3,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include "KDTree.h"
+#include "../point_generation.hh"
 
 using namespace std;
 
@@ -11,23 +12,21 @@ int main() {
     srand(time(NULL));
     KDTree tree=KDTree();
 
-    int n = rand()%1000; //Numero de punts
-    int m = rand()%10; //dimensions
+    int n = get_random_int(0, 1000); //Numero de punts
+    int m = get_random_int(1, 10); //dimensions
     cout<<n<<" "<<m<<endl;
 
     //point des del que busquem el mes proper
-    vector<double> epoint(m);
-    for(int i=0;i<m;i++){
-        epoint[i] = (double)(rand() % 1000000) / 1000000;
-    }
+    vector<double> epoint = generate_point(m);
+
     double min=10;
     double dist;
     vector<double> sol(m);
     //input de tots el punts
     for (int i=0;i<n;i++) {
-        vector<double> point(m);
+        vector<double> point = generate_point(m);
+
         for(int j=0;j<m;j++){
-            point[j] = (double)(rand() % 1000000) / 1000000;
             cout<<point[j]<<" ";
         }
 

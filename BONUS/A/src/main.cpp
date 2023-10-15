@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "KDTree.h"
+#include "../../../point_generation.hh"
 
 using namespace std;
 
@@ -15,19 +16,13 @@ int main() {
         for(int k=2;k<=6;k++){
 
             for (int i=0;i<n;i++) {
-                vector<double> tree_point(k);
-                for(int j=0;j<k;j++){
-                    tree_point[j] = (double)(rand() % 1000000) / 1000000;
-                }
+                vector<double> tree_point = generate_point(k);
                 tree.insert(tree_point);
             }
 
 
             for(int q=0; q < Q;q++){
-                vector<double> point(k);
-                for(int i=0;i<k;i++){
-                    point[i] = (double)(rand() % 1000000) / 1000000;
-                }
+                vector<double> point = generate_point(k);
 
                 int cost=0;
                 clock_t start, end;
