@@ -33,7 +33,7 @@ class KDTree {
         KDNode* insert(KDNode* node, const vector<double>& point,vector<double> bb);
 
 
-        //retorna la dimensio amb més que te més grandaria del punt
+        //retorna la dimensio amb més que te més grandaria en la bounding box.
         int bigdimensionBB (const vector<double>& bb);
 
 

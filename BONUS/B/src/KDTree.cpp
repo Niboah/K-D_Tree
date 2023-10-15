@@ -17,38 +17,36 @@ KDTree::KDTree() : root(nullptr) {}
 
 
 int KDTree::bigdimensionBB (const vector<double>& bb){
-    int imax = 0;
-    double max = bb[0];
-    for(int i=1;i<bb.size();i++){
-        if(bb[i]>max){
-            max=bb[i];
+    double dmax = bb[1]-bb[0];
+    double d;
+    int imax=0;
+    for(int i=2;i<bb.size();i+=2){
+        d = bb[i+1]-bb[i];
+        if(d>dmax){
+            dmax=d;
             imax=i;
         }
     }
-    return imax;
+    return imax/2;
 }
 
 // Función para insertar un punto en el árbol k-d
 KDNode* KDTree::insert(KDNode* node, const vector<double>& point,vector<double> bb) {
     
-    int dis = bigdimensionBB(bb);
-    
+    int dis = bigdimensionBB(bb);//mira la dimensió amb més amplitud.
     if (node == nullptr){
         KDNode* a = new KDNode(point,dis);
         cout<<a->discriminant<<endl;
         return a;
-
     }
-
     // Comparar puntos en función de la dimensión actual
-    if (point[node->discriminant] < node->point[node->discriminant]) {
-        bb[dis] = node->point[dis];
+    if (point[(node->discriminant)] < node->point[node->discriminant]) {
+        bb[((node->discriminant)*2)+1] = node->point[node->discriminant];//el punt final de la bounding box en la dimensió discriminant tindrà la posició del node en la dimensió discriminant.
         node->left = insert(node->left, point,bb);
     } else {
-        bb[dis] = 1 - node->point[dis];
+        bb[(node->discriminant)*2] = node->point[node->discriminant]; //el punt inicial de la bounding box en la dimensió discriminant tindrà la posició del node en la dimensió discriminant.
         node->right = insert(node->right, point,bb);
     }
-
     return node;
 }
 
@@ -62,8 +60,15 @@ void KDTree::destroyTree(KDNode* node) {
 }
 
 // Función para insertar un punto en el árbol k-d
+//bb té 2 valors per dimensió que indiquen el punt inicial i 
+//final de la bouding box per cada coordenada.
 void KDTree::insert(const vector<double>& point) {
-    vector<double> bb (point.size(),1);
+    vector<double>bb (2*point.size());
+
+    for(int i=0;i<bb.size();i+=2){
+        bb[i]=0;
+        bb[i+1]=1;
+    }//en totes les dimensions l'hipercub va de 0 a 1.
     root = insert(root, point,bb);
 }
 
