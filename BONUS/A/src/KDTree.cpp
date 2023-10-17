@@ -2,7 +2,7 @@
 
 using namespace std;
 
-KDNode::KDNode(const vector<double>& p) : point(p), left(nullptr), right(nullptr), discriminant( get_random_int(1, p.size() - 1) ) {}
+KDNode::KDNode(const vector<double>& p) : point(p), left(nullptr), right(nullptr), discriminant( get_random_int(0, p.size() - 1) ) {}
 
 string KDNode::getName(){
     string name="";
