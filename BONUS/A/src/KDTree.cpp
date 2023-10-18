@@ -11,16 +11,12 @@ string KDNode::getName(){
     return name;
 }
 
-
 KDTree::KDTree() : root(nullptr) {}
 
 // Función para insertar un punto en el árbol k-d
 KDNode* KDTree::insert(KDNode* node, const vector<double>& point) {
     if (node == nullptr){
-        //KDNode* a = new KDNode(point);
-        //cout<<a->discriminant<<endl;
         return new KDNode(point);
-
     }
 
     // Comparar puntos en función de la dimensión actual

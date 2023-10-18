@@ -19,6 +19,7 @@ int main(int argc, char* argv[]) {
     }else if(argc==2){
         K = *argv[1] - '0';
     }
+    
     KDTree tree=KDTree();
 
     for(int n=1;n<N;n++){

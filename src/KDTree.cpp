@@ -16,9 +16,6 @@ KDTree::KDTree() : root(nullptr) {}
 // Función para insertar un punto en el árbol k-d
 KDNode* KDTree::insert(KDNode* node, const vector<double>& point, int depth) {
     if (node == nullptr){
-
-        //cout<<(depth%point.size())<<endl;
-        
         return new KDNode(point);
     }
 
@@ -128,7 +125,6 @@ void KDTree::print2DUtil(KDNode* root, int space,int count,bool left){
     // Process left child
     print2DUtil(root->right, space,count,false);
 }
-
 
 // Función para mostrar el arbol k-d
 void KDTree::print() {

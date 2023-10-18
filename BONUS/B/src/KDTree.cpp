@@ -11,10 +11,7 @@ string KDNode::getName(){
     return name;
 }
 
-
 KDTree::KDTree() : root(nullptr) {}
-
-
 
 int KDTree::bigdimensionBB (const vector<double>& bb){
     double dmax = bb[1]-bb[0];
@@ -32,7 +29,6 @@ int KDTree::bigdimensionBB (const vector<double>& bb){
 
 // Función para insertar un punto en el árbol k-d
 KDNode* KDTree::insert(KDNode* node, const vector<double>& point,vector<double> bb) {
-    
     
     if (node == nullptr){
         int dis = bigdimensionBB(bb);//mira la dimensió amb més amplitud.

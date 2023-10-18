@@ -26,7 +26,6 @@ int main(int argc, char* argv[]) {
         cerr << "!! warning !! no K detected, defaulting to K = 2" << endl;
     }
     else if (argc == 2) {
-        
         K = *argv[1] - '0';
     }
 
@@ -60,8 +59,7 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    while (waitpid(-1, NULL, 0) > 0)
-        ;
+    while (waitpid(-1, NULL, 0) > 0);
 
     return 0;
 }

@@ -48,7 +48,6 @@ class KDTree {
         // Función para insertar un punto en el árbol k-d
         void insert(const vector<double>& point);
 
-
         // Función para destruir el árbol k-d
         void destroy();
 

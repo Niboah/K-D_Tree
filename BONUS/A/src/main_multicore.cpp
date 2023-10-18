@@ -60,8 +60,7 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    while (waitpid(-1, NULL, 0) > 0)
-        ;
+    while (waitpid(-1, NULL, 0) > 0);
 
     return 0;
 }

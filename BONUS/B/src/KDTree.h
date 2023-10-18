@@ -32,15 +32,13 @@ class KDTree {
         // Función para insertar un punto en el árbol k-d
         KDNode* insert(KDNode* node, const vector<double>& point,vector<double> bb);
 
-
         //retorna la dimensio amb més que te més grandaria en la bounding box.
         int bigdimensionBB (const vector<double>& bb);
-
 
         // Función para destruir el árbol k-d
         void destroyTree(KDNode* node);
 
-        // Función para mostrar el árbil k-d
+        // Función para mostrar el árbol k-d
         void print2DUtil(KDNode* root, int ,int,bool);
 
         // Función para encontrar el punto más cercano recursivamente
@@ -52,19 +50,19 @@ class KDTree {
         // Función para insertar un punto en el árbol k-d
         void insert(const vector<double>& point);
 
-
         // Función para destruir el árbol k-d
         void destroy();
 
         // Función para encontrar el punto más cercano
         KDNode* findNearest(const vector<double>& q,int& cost);
 
-        // Función para mostrar el árbil k-d
+        // Función para mostrar el árbol k-d
         void print();
 
-        // Función para mostrar el árbil k-d
+        // Función para mostrar el árbol k-d
         void print(int n);
 
+        // Funció per obtenir el arrel del árbol k-d
         KDNode* getRoot() {return root;}
 };
 
